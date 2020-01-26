@@ -168,8 +168,8 @@
           <provider editor-type-id="Gfm" />
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor>
-                <caret column="24" selection-start-column="24" selection-end-column="24" />
+              <first_editor relative-caret-position="396">
+                <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
               </first_editor>
               <second_editor />
             </state>
@@ -218,6 +218,7 @@
         <option value="$PROJECT_DIR$/database/migrations/2020_01_25_002023_create_airports_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2020_01_25_002051_create_flights_table.php" />
         <option value="$PROJECT_DIR$/resources/views/components/header.blade.php" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -345,6 +346,17 @@
             <path>
               <item name="Braintlyviajes" type="b2602c69:ProjectViewProjectNode" />
               <item name="Braintlyviajes" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Braintlyviajes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Braintlyviajes" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Braintlyviajes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Braintlyviajes" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -396,12 +408,12 @@
       <option name="presentableId" value="Default" />
       <updated>1579986564390</updated>
       <workItem from="1579986569890" duration="6218000" />
-      <workItem from="1580052088039" duration="6068000" />
+      <workItem from="1580052088039" duration="6396000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14243000" />
+    <option name="totallyTimeSpent" value="14571000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -532,8 +544,8 @@
       <provider editor-type-id="Gfm" />
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="24" selection-start-column="24" selection-end-column="24" />
+          <first_editor relative-caret-position="396">
+            <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
           </first_editor>
           <second_editor />
         </state>
