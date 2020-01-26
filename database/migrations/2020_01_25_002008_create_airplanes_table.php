@@ -27,23 +27,14 @@ class CreateAirplanesTable extends Migration
             ['airline_id' => 1, 'model' => '737-800', 'first_class_seats' => '20', 'economy_class_seats' => '106', 'total_seats' => '126'],
             ['airline_id' => 1, 'model' => '737-800', 'first_class_seats' => '20', 'economy_class_seats' => '106', 'total_seats' => '126'],
             ['airline_id' => 1, 'model' => '737-800', 'first_class_seats' => '16', 'economy_class_seats' => '100', 'total_seats' => '116'],
-            ['airline_id' => 1, 'model' => 'Airbus A321neo', 'first_class_seats' => '0', 'economy_class_seats' => '235', 'total_seats' => '235'],
-            ['airline_id' => 1, 'model' => 'Airbus A321neo', 'first_class_seats' => '0', 'economy_class_seats' => '235', 'total_seats' => '235'],
+            ['airline_id' => 1, 'model' => 'Airbus A321', 'first_class_seats' => '0', 'economy_class_seats' => '235', 'total_seats' => '235'],
+            ['airline_id' => 1, 'model' => 'Airbus A321', 'first_class_seats' => '0', 'economy_class_seats' => '235', 'total_seats' => '235'],
             ['airline_id' => 2, 'model' => '737-800', 'first_class_seats' => '20', 'economy_class_seats' => '110', 'total_seats' => '130'],
             ['airline_id' => 2, 'model' => '737-800', 'first_class_seats' => '16', 'economy_class_seats' => '100', 'total_seats' => '116'],
-            ['airline_id' => 2, 'model' => 'Airbus A321neo', 'first_class_seats' => '0', 'economy_class_seats' => '235', 'total_seats' => '235'],
-            ['airline_id' => 2, 'model' => 'Airbus A321neo', 'first_class_seats' => '0', 'economy_class_seats' => '235', 'total_seats' => '235'],
             ['airline_id' => 3, 'model' => 'Airbus A321', 'first_class_seats' => '0', 'economy_class_seats' => '186', 'total_seats' => '186'],
             ['airline_id' => 3, 'model' => 'Airbus A321', 'first_class_seats' => '0', 'economy_class_seats' => '186', 'total_seats' => '186'],
             ['airline_id' => 3, 'model' => 'Airbus A321', 'first_class_seats' => '0', 'economy_class_seats' => '186', 'total_seats' => '186'],
             ['airline_id' => 3, 'model' => 'Airbus A321', 'first_class_seats' => '0', 'economy_class_seats' => '186', 'total_seats' => '186'],
-            ['airline_id' => 4, 'model' => '737-800', 'first_class_seats' => '0', 'economy_class_seats' => '115', 'total_seats' => '115'],
-            ['airline_id' => 4, 'model' => '737-800', 'first_class_seats' => '0', 'economy_class_seats' => '115', 'total_seats' => '115'],
-            ['airline_id' => 4, 'model' => '737-800', 'first_class_seats' => '0', 'economy_class_seats' => '115', 'total_seats' => '115'],
-            ['airline_id' => 4, 'model' => '737-800', 'first_class_seats' => '0', 'economy_class_seats' => '115', 'total_seats' => '115'],
-            ['airline_id' => 4, 'model' => '737-800', 'first_class_seats' => '0', 'economy_class_seats' => '115', 'total_seats' => '115'],
-            ['airline_id' => 5, 'model' => '737-800', 'first_class_seats' => '0', 'economy_class_seats' => '115', 'total_seats' => '115'],
-            ['airline_id' => 5, 'model' => '737-800', 'first_class_seats' => '0', 'economy_class_seats' => '115', 'total_seats' => '115'],
         ]);
     }
 
@@ -54,6 +45,6 @@ class CreateAirplanesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aircrafts');
+        Schema::dropIfExists('airplanes');
     }
 }
