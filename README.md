@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/lucasbraintly/braintly-viajes/master/public/images/logo.png?token=AKRJSGMW2AO4MR76SDRMA2S6FXFVI" width="400"></p>
+<p align="center"><img src="https://i.imgur.com/Htvlmil.png" width="400"></p>
 
 ## BraintlyViajes
 
