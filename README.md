@@ -16,6 +16,7 @@ Pasos para instalar
 4. Editar el .env y colocar las credenciales de una base de datos MySQL
 5. ```composer install```
 6. ```php artisan migrate```
+7. ```php artisan db:seed```
 
 Si tienes dudas con la instalación, puedes enviar un email a lucas@braintly.com
 
