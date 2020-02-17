@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:200,300,400,600&display=swap');
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f8f8;
 }
 
 .logo {
@@ -54,6 +55,7 @@ footer {
     height: auto;
     background: none;
     border-bottom: solid 2px #ccc;
+    border-top: solid 2px #ccc;
     background: #eee;
 }
 
@@ -65,4 +67,20 @@ footer {
     font-weight: bold;
     font-size: 24px;
     padding-left: 10px;
+}
+.lblPriceFlight{
+    font-weight: bold;
+    font-size: 24px;
+}
+.txtClassFlight {
+    font-size: 12px;
+}
+
+.itemFlight {
+    border-radius: .25rem;
+    border-width: .5rem;
+    box-shadow: 0 2px 4px 0 #63668030;
+    border-left-style: solid;
+    border-left-color: rgba(170,40,40,1);
+    background-color: #FFF;
 }

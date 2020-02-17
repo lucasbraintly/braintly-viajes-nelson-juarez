@@ -12,61 +12,65 @@
                             <input type="hidden" name="idFlight" value="{{ $flight->id }}">
                             @csrf
                             @method("POST")
-                            <div class="card mb-3 bg-light">                                
-                                <div class="card-body">
+                            <div class="mb-3 itemFlight">                                
+                                <div class="card-body ">
                                     <div class="row">
-                                        <div class="col-2"> {{ $flight->aeropuerto }} </div>
-                                        <div class="col-6">
-                                            <div class="boxSalida float-left px-4 text-right">
-                                                <span class="bold d-block font-weight-bold"> SALIDA </span>
-                                                <span class="bold d-block"> {{ date('d/m/Y H:i', strtotime($flight->departure_date)) }} </span>
-                                                <span class="bold d-block"> {{ $flight->depAirport_iata_code }} </span>
-                                                <span class="bold d-block"> {{ $flight->depAirport_province }} </span>
+                                        <div class="d-flex flex-column col-8">
+                                            <div style="border-bottom: solid 1px #ccc;padding-bottom: 0.5rem; font-weight: bold;">
+                                                {{ $flight->departure_date_format }}
                                             </div>
-                                            <div class="boxDuracion float-left tect-center" style=" width: 100px; text-align: center;">
-                                                {{ date('H:i', mktime( 0,$flight->duration )) }}
-                                                <hr style="background: red;">
-                                            </div>
-                                            <div class="boxLlegada float-left px-4">
-                                                <span class="bold d-block font-weight-bold"> LLEGADA </span>
-                                                <span class="bold d-block"> {{ date('d/m/Y H:i', strtotime($flight->arrival_date)) }} </span>
-                                                <span class="bold d-block"> {{ $flight->arriAirport_iata_code }} </span>
-                                                <span class="bold d-block"> {{ $flight->arriAirport_province }} </span>
+                                            <div class="d-flex flex-row justify-content-between align-items-center h-100">
+                                                <div> {{ $flight->aeropuerto }} </div>
+                                                <div class="boxSalida px-4 text-right">
+                                                    <span class="bold d-block font-weight-bold" style="font-size: 1.75rem;"> {{ date('H:i', strtotime($flight->departure_date)) }} </span>
+                                                    <span style="font-size: 0.6875rem; color: #636680;" class="bold d-block"> {{ $flight->depAirport_iata_code }} </span>
+                                                    <span style="font-size: 0.6875rem; color: #636680;" class="bold d-block"> {{ $flight->depAirport_province }} </span>
+                                                </div>
+                                                <div class="boxDuracion text-center" style=" width: 100px; text-align: center;">
+                                                    {{ date('H:i', mktime( 0,$flight->duration )) }}
+                                                    <hr style="background: red;">
+                                                </div>
+                                                <div class="boxLlegada px-4">
+                                                    <span class="bold d-block font-weight-bold" style="font-size: 1.75rem;"> {{ date('H:i', strtotime($flight->arrival_date)) }} </span>
+                                                    <span style="font-size: 0.6875rem; color: #636680;" class="bold d-block"> {{ $flight->arriAirport_iata_code }} </span>
+                                                    <span style="font-size: 0.6875rem; color: #636680;" class="bold d-block"> {{ $flight->arriAirport_province }} </span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="d-flex align-items-center col-4 justify-content-end">
                                             <div class="d-block">
                                                 @if( $flight->disponibleEconomy > 0)
-                                                    <div>
-                                                        <div> 
+                                                    <div class="d-flex flex-row justify-content-between">
+                                                        <div class="mr-4 d-flex align-items-center"> 
                                                             <input required type="radio" checked name="class_seat_{{ $flight->id }}" 
                                                                 value="economy_{{ $flight->priceEconomy }}"
                                                             > 
                                                         </div>
-                                                        <div class="pl-4 pm-4">
-                                                            <span class="d-block">$ {{ $flight->priceEconomy }} </span>
-                                                            <span class="d-block">Economy ( Disponibles: {{ $flight->disponibleEconomy }} )</span>
+                                                        <div class="d-flex flex-column text-right">
+                                                            <span class="d-block lblPriceFlight">$ {{ $flight->priceEconomy }} </span>
+                                                            <span style="font-size: 12px" class="d-block">Economy ( {{ $flight->disponibleEconomy }} disponibles)</span>
                                                         </div>
                                                     </div>
                                                 @endif
 
                                                 @if( $flight->disponibleFirst > 0)
-                                                    <div>
-                                                        <div>
+                                                    <div> <hr style="margin: 0.5rem 0;"/> </div>
+                                                    <div class="d-flex flex-row justify-content-between">
+                                                        <div class="mr-4 d-flex align-items-center">
                                                             <input required type="radio" name="class_seat_{{ $flight->id }}" 
                                                                 value="first_{{ $flight->priceFirst }}"
                                                             > 
                                                         </div>
-                                                        <div>
-                                                            <span class="d-block">Primera clase </span>                                           
-                                                            <span class="d-block">$ {{ $flight->priceFirst }} </span>
-                                                            <span class="d-block">( Disponibles: {{ $flight->disponibleFirst }} )</span>
+                                                        <div class="d-flex flex-column text-right">
+                                                            <span class="d-block lblPriceFlight">$ {{ $flight->priceFirst }} </span>
+                                                            <span style="font-size: 12px"class="d-block">Primera clase  ( {{ $flight->disponibleFirst }} disponibles )</span>
                                                         </div>
                                                     </div>
                                                 @endif
-                                            </div>
-                                            <div class="d-block mt-4">
-                                                <button type="submit" class="btn btn-success"> Reservar </button>
+                                                <div> <hr style="margin: 0.5rem 0;"> </div>
+                                                <div class="mt-4 text-center">
+                                                    <button type="submit" class="btn btn-success btn-block"> Reservar </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -75,6 +79,8 @@
                             </div>
                         </form>
                         @endforeach
+
+                        {!! $objFlights->links() !!}
                     @else
                         <div class="alert alert-danger" role="alert">
                             No existe vuelos para los datos ingresados.

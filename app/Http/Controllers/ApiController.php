@@ -34,7 +34,7 @@ class ApiController extends Controller
                         ->select('flights.*', 'airplanes.economy_class_seats', 
                         'airplanes.first_class_seats', 'airlines.name as aeropuerto')
                         ->orderBy('flights.base_price', 'DESC')
-                        ->get();
+                        ->paginate(10);
         
         foreach ($objFlights as $i => $item) {
             // Obtengo la cantidad de asientos disponibles tanto para la clase enconomica como 
@@ -45,6 +45,10 @@ class ApiController extends Controller
             $objReservation = $this->obtenerReservasVuelo( $item->id );
             $item->disponibleEconomy = $item->economy_class_seats - $objReservation['economy'];
             $item->disponibleFirst = $item->first_class_seats - $objReservation['first'];
+            
+            // Utilizo carbon para formatear la fecha de salida
+            $dt = Carbon::parse($item->departure_date);
+            $item->departure_date_format = $dt->isoFormat('dddd D \d\e MMMM \d\e Y');
             
             // Si no tengo asientos disponibles en ninguna clase no muestro el vuelo.
             if($item->disponibleEconomy <= 0 && $item->disponibleFirst <= 0) {
