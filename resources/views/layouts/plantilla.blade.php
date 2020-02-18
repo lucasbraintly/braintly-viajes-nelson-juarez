@@ -32,5 +32,62 @@
 </body>
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        if ($("#confirm_form").length > 0) {
+            $("#confirm_form").validate({
+    
+                rules: {
+                    name_user: {
+                        required: {
+                            depends:function(){
+                                $(this).val($.trim($(this).val()));
+                                return true;
+                            }
+                        },
+                        maxlength: 50
+                    },
+                    surname_user: {
+                        required: {
+                            depends:function(){
+                                $(this).val($.trim($(this).val()));
+                                return true;
+                            }
+                        },
+                        maxlength: 50
+                    },
+    
+                    email_user: {
+                        required: {
+                            depends:function(){
+                                $(this).val($.trim($(this).val()));
+                                return true;
+                            }
+                        },
+                        maxlength: 50,
+                        email: true
+                    }
+                },
+                messages: {    
+                    name_user: {
+                        required: "* Campo obligatorio",
+                        maxlength: "El campo no puede superar los 50 caracteres."
+                    },
+                    surname_user: {
+                        required: "* Campo obligatorio",
+                        maxlength: "El campo no puede superar los 50 caracteres."
+                    },
+                    email_user: {
+                        required: "* Campo obligatorio",
+                        email: "Ingrese in email válido",
+                        maxlength: "El campo no puede superar los 50 caracteres."
+                    }
+                },
+            })
+        } 
+    });
+</script>
 </html>

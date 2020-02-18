@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Flight;
 use App\Models\Airport;
@@ -12,7 +13,7 @@ use Carbon\Carbon;
 class ApiController extends Controller
 {
     private $INCREMENT_FIRST_CLASS = 0.6;
-
+    
     /**
      * Función para obtener todos los vuelos disponibles cargados en BD
      * Los vuelos tienen que estar en estado 'scheduled', tener asientos disponibles y la fecha de
@@ -59,6 +60,7 @@ class ApiController extends Controller
         
         if( $dateDeparture )
             $arWhere[] = [ 'departure_date', '>=', $dateDeparture.' 00:00:00' ];
+
         /**
          * Obtengo los vuelos programados que sean de hoy en adelante, no tengo en cuenta
          * vuelos pasados que tengan el estado programado, esto no debería pasar.
@@ -85,8 +87,9 @@ class ApiController extends Controller
             $item->disponibleFirst = $item->first_class_seats - $objReservation['first'];
             
             // Utilizo carbon para formatear la fecha de salida
-            $dt = Carbon::parse($item->departure_date);
-            $item->departure_date_format = $dt->isoFormat('dddd D \d\e MMMM \d\e Y');
+            $date = Carbon::parse($item->departure_date);
+            $item->departure_date_format = $date->isoFormat('dddd D \d\e MMMM \d\e Y');
+            $duration = Carbon::parse($item->duration);
             
             // Si no tengo asientos disponibles en ninguna clase no muestro el vuelo.
             if($item->disponibleEconomy <= 0 && $item->disponibleFirst <= 0) {
@@ -137,11 +140,11 @@ class ApiController extends Controller
     {
         // Obtengo el id de vuelo
         $idFlight = $request->idFlight;
+
         /**
          * Obtengo nuevamente el importe ya que en el transcurso se puedieron realizar reservas
          * y la disponibilidad de asientos afecta al precio final del vuelo.
-         */
-        
+         */        
         $radio = $request->{'class_seat_'.$idFlight};
         list($tipoClass, $basePrice ) = explode('_', $radio);
 
@@ -152,15 +155,18 @@ class ApiController extends Controller
          */        
         $flight = DB::table('flights')
                         ->join('airplanes', 'flights.airplane_id', '=', 'airplanes.id')
+                        ->join('airlines', 'airplanes.airline_id', '=', 'airlines.id')
                         ->where('flights.id', $idFlight)
-                        ->select('flights.*', 'airplanes.economy_class_seats', 'airplanes.first_class_seats')
+                        ->select('flights.*', 'airplanes.economy_class_seats', 'airplanes.first_class_seats', 'airlines.name as aeropuerto')
                         ->first();
-        
         $aDearture = Airport::find($flight->departure_airport_id)->first();
-        $aArrival = Airport::find($flight->arrival_airport_id)->first();
-
-        $precioVuelo   = 0;
+        $aArrival  = Airport::find($flight->arrival_airport_id)->first();
+        $precioVuelo    = 0;
         $precioEconomy  = 0;
+        
+        // Utilizo carbon para formatear la fecha de salida
+        $date = Carbon::parse($flight->departure_date);
+        $flight->departure_date_format = $date->isoFormat('dddd D \d\e MMMM \d\e Y');
 
         // Verifico si tengo asientos disponibles para la clase seleccionada, si no tengo disponibilidad
         // informo en pantalla y termino el proceso.
@@ -229,22 +235,37 @@ class ApiController extends Controller
     public function saveReservation( Request $request )
     {
         $error = 0;
-        
-        // Verifico que haya asientos disponibles para la clase seleccionada
-        if( $this->verificarAsientosDisponibles($request->idFlight , $request->class) > 0 ) {
-            $objReservation = new reservation();
-            $objReservation->idFlight = $request->idFlight;        
-            $objReservation->name = $request->name_user;
-            $objReservation->surname = $request->surname_user;
-            $objReservation->email = $request->email_user;
-            $objReservation->price = $request->price;
-            $objReservation->class_seats = $request->class;
-            $objReservation->fechaReserva = now();
-            $isSaveSuccess = $objReservation->save();
-            $error = $isSaveSuccess ? 0: 1;
+
+        // Verifico que existan los datos necesarios para cargar la reserva del vuelo en cuestión
+        if( $request && isset($request->idFlight) && isset($request->class) ) {
+
+            // Verifico que la reserva se realice para un vuelo en estado 'scheduled'
+            $objFlight = Flight::where('id', $request->idFlight)
+                                ->where('status', 'scheduled')
+                                ->exists();
+            if( $objFlight ) {
+                // Verifico que haya asientos disponibles para la clase seleccionada
+                if( $this->verificarAsientosDisponibles($request->idFlight , $request->class) > 0 ) {
+                    $objReservation = new reservation();
+                    $objReservation->idFlight = $request->idFlight;        
+                    $objReservation->name = $request->name_user;
+                    $objReservation->surname = $request->surname_user;
+                    $objReservation->email = $request->email_user;
+                    $objReservation->price = $request->price;
+                    $objReservation->class_seats = $request->class;
+                    $objReservation->fechaReserva = now();
+                    $isSaveSuccess = $objReservation->save();
+                    $error = $isSaveSuccess ? 0: 1;
+                } else {
+                    // No hay disponibilidad para el vuelo y tipo de asiento que se desea reservar
+                    $error = 2;
+                }
+            } else {
+                // El vuelo no está en estado scheduled, no se puede realizar reservas
+                $error = 3;
+            }
         } else {
-            // No hay disponibilidad para el vuelo y tipo de asiento que se desea reservar
-            $error = 2;
+            $error = 1;
         }
 
         return view('detailFlight', compact('error'));
@@ -349,6 +370,7 @@ class ApiController extends Controller
     {
         $idReserva = $request->idReservation ?? 0;
         $error = 0;
+
         /**
          *  Verifico que exista la reserva antes de eliminarla, si no existe muestro
          *  un mensaje por pantalla

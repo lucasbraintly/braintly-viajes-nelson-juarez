@@ -1,2 +1,7 @@
 Nota:
- En la instalación se debe agregar php artisan key:generate
+    * En la instalación se debe agregar php artisan key:generate
+    * En el flight factory para el campo airplane_id se obtiene un random de los id de la tabla airline, pero debería ser de la tabla airplanes. Como está puesto hoy en día sólo trae airlines en el rango 1 - 3.
+    Pero en la tabla airplanes hay más valores para elegir. El cambio debería ser: 
+            'airplane_id' => \App\Models\Airplane::all()->random()->id
+    * Sería una buena práctica disponer de una tabla "tarjeta de crédito" con el fin de poder calcular el saldo disponible
+    cada vez que se quiere hacer una reserva. Con esto se agregaría la complejidad de verificar saldos.

@@ -49,6 +49,8 @@ footer {
 
 .boxHeader { 
     border-bottom: solid 2px #ccc; 
+    overflow: hidden;
+    background-color: #FFF;
 }
 
 .boxSearchAirport { 
@@ -92,3 +94,68 @@ footer {
     border-left-color: rgba(170,40,40,1);
     background-color: #FFF;
 }
+.titItemFlight {
+    border-bottom: solid 1px #ccc;
+    padding-bottom: 0.5rem; 
+    font-weight: bold;
+}
+
+.airlineItemFlight {
+    font-size: 1.75rem;
+}
+
+.detAirlineFlight {
+    font-size: 0.6875rem; 
+    color: #636680;
+}
+
+.boxDuracion {
+    width: 150px; 
+    text-align: center;
+}
+.boxDuracion .lblTime {
+    font-size: 0.9rem; 
+    color: #636680;
+}
+
+.boxDuracion .lineDuracion {
+    background: red; 
+    margin: 5px 0 0 0;
+}
+
+.lineDividerItemFlight {
+    padding: 0 1.25rem;
+}
+
+.boxPrice {
+    border-left: solid #ccc;
+}
+
+.lblDisponiblesItemFlight {
+    font-size: 12px;
+}
+
+.lineDividerPrice {
+    margin: 0.5rem 0;
+}
+
+@media (max-width:770px){
+    .boxPrice{
+        border-left:none;
+    }
+}
+
+.boxMainDetailFlight { background: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 #636680;
+}
+.titleDetailFlight { padding: 14px 20px 10px; border-bottom: solid 2px #ccc; padding: 20px; margin: 0; }
+
+.boxPriceDetailFlight { border-left: solid #dc3545 4px }
+@media (max-width:992px){
+    .boxPriceDetailFlight{
+        border-left:none;
+    }
+}
+label.error { font-size: 12px; color: #dc3545;}
+input.error { border-color: #dc3545;}
