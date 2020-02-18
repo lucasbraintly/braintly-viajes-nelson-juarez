@@ -4,7 +4,58 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-12">
-                @if( !isset($msgReservation  ))
+                @if( isset($error) )
+                    @switch( $error )
+                        @case(0)
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Proceso exitoso!</h4>
+                                <p>
+                                    La reserva fue realizada correctamente, 
+                                    gracias por confiar en nosotros.
+                                </p>
+                                <hr>
+                                <p class="mb-0">
+                                    Puede hacer un seguimiento de su reserva ingresando en 
+                                    <a href="{{ url('/reservation') }}"> 
+                                        Vuelos reservados 
+                                    </a>
+                                </p>
+                            </div>
+                            @break
+
+                        @case(1)
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4 class="alert-heading">ERROR AL GUARDAR LA RESERVA!</h4>
+                                <p>
+                                    La reserva no se pudo completarte correctamente, 
+                                    inténtelo nuevamente más tarde
+                                </p>
+                                <hr>
+                                <p class="mb-0">
+                                    Si el problema persisten contáctese con el administrador del sistema.
+                                </p>
+                            </div>
+                            @break
+                        @case(2)
+                            <div class="alert alert-danger text-center" role="alert">
+                                <h4 class="alert-heading">ERROR DE DISPONIBIILIDAD!</h4>
+                                <p>El vuelo que desea reservar no cuenta con disponibilidad 
+                                para el tipo de asiento que a seleccionado.</p>
+                                <hr>
+                                <p class="mb-0">
+                                    Por favor vuelva a consultar el vuelo para actualizar 
+                                    la disponibilidad de asientos
+                                </p>
+                            </div>
+                            @break
+                    @endswitch
+
+                    <div class="mt-4 text-center">
+                        <a href="{{ url('/') }}"> 
+                            Realizar otra búsqueda
+                        </a>
+                    </div>
+                @else
                     <h2>Detalle de reserva</h2>
                     <div class="card mb-3 bg-light">                                
                         <div class="card-body">
@@ -51,17 +102,17 @@
                             <div class="row mt-4">
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group">
-                                        <input required name="name_user" type="text" class="form-control" placeholder="Nombre de contacto">
+                                        <input name="name_user" maxlength="20" type="text" class="form-control" placeholder="Nombre de contacto">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group">
-                                        <input required name="surname_user" type="text" class="form-control" placeholder="Apellido de contacto">
+                                        <input name="surname_user" maxlength="20" type="text" class="form-control" placeholder="Apellido de contacto">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group">
-                                        <input required name="email_user" type="email" class="form-control" placeholder="Email">
+                                        <input name="email_user" id="email_user" maxlength=50" type="email" class="form-control" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-12 mt-4">
@@ -71,36 +122,6 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                @else
-                    @if( $msgReservation )
-                        <div class="alert alert-success" role="alert">
-                            <h4 class="alert-heading">Proceso exitoso!</h4>
-                            <p>La reserva fue realizada correctamente, gracias por confiar en nosotros.</p>
-                            <hr>
-                            <p class="mb-0">
-                                Puede hacer un seguimiento de su reserva ingresando en 
-                                <a href="{{ url('/reservation') }}"> 
-                                    Vuelos reservados 
-                                </a>
-                            </p>
-                        </div>
-
-                    @else
-                        <div class="alert alert-danger" role="alert">
-                            <h4 class="alert-heading">ERROR AL GUARDAR LA RESERVA!</h4>
-                            <p>La reserva no se pudo completarte correctamente, inténtelo nuevamente más tarde</p>
-                            <hr>
-                            <p class="mb-0">
-                                Si el problema persisten contáctese con el administrador del sistema.
-                            </p>
-                        </div>
-                    @endif
-
-                    <div class="mt-4 text-center">
-                        <a href="{{ url('/') }}"> 
-                            Realizar otra búsqueda
-                        </a>
                     </div>
                 @endif
             </div>

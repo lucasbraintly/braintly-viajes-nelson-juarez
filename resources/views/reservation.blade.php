@@ -5,12 +5,12 @@
         <div class="row">
             <div class="col-12">
                 @if (session('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success text-center">
                         {{ session('success') }}
                     </div>
                 @endif
 
-                <h2>Lista de reserva</h2>
+                <h2 class="my-4">Listado de reserva</h2>
                 <div class="boxTableReservations">
                     @if( count($objReservations) > 0 )
                         <table class="table table-bordered">
@@ -58,33 +58,15 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="mt-5 d-flex justify-content-center">
+                            {!! $objReservations->links() !!}
+                        </div>
                     @else
                         <div class="mt-4 text-center alert alert-danger">
                             No hay reservas realizadas.
                         </div>
                     @endif
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalConfirmCancel" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Cancelación de reserva</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Desea cancelar la reserva seleccionada?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Confirmar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            </div>
             </div>
         </div>
     </div>
