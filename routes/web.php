@@ -16,11 +16,9 @@ Route::post('/flights', 'ApiController@search')->name('flights.search');
 Route::post('/listFlights', 'ApiController@listFlights')
         ->name('flights.list');
 Route::get('/listFlights', 'ApiController@listFlights')
-        ->name('flights.list');
-        
+        ->name('flights.list');        
 Route::post('/detailFlight', 'ApiController@detailFlight')->name('flights.detail');
 Route::get('/detailFlight', 'IndexController@index');
-
 Route::post('/saveReservation', 'ApiController@saveReservation')->name('flights.saveReservation');
 Route::get('/reservation', 'ApiController@reservation')->name('reservation.list');
 Route::get('/cancellation/{idReserva}', 'ApiController@showCancellation')->name('cancellation.show');

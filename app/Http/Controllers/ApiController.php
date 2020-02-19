@@ -173,6 +173,7 @@ class ApiController extends Controller
         $objReservation = $this->obtenerReservasVuelo( $idFlight ) ?? null;
         $flight->disponibleEconomy = $flight->economy_class_seats - $objReservation['economy'];
         $flight->disponibleFirst = $flight->first_class_seats - $objReservation['first'];
+        session(['reSubmit' => 0]); // Flag utilizado para evitar resubmit
 
         if( $tipoClass == 'economy' ) {
             if( $flight->disponibleEconomy <= 0) {
@@ -234,7 +235,13 @@ class ApiController extends Controller
 
     public function saveReservation( Request $request )
     {
-        $error = 0;
+        // Evito resubmit en confirmación de reserva
+        if ( $request->session()->exists('reSubmit') && session('reSubmit') ) {
+            $airports = Airport::orderBy('location')->get();
+            //return view('index', compact('airports'));
+            //return back();
+            return redirect()->to('/'); 
+        }
 
         // Verifico que existan los datos necesarios para cargar la reserva del vuelo en cuestión
         if( $request && isset($request->idFlight) && isset($request->class) ) {
@@ -256,6 +263,7 @@ class ApiController extends Controller
                     $objReservation->fechaReserva = now();
                     $isSaveSuccess = $objReservation->save();
                     $error = $isSaveSuccess ? 0: 1;
+                    session(['reSubmit' => 1]);
                 } else {
                     // No hay disponibilidad para el vuelo y tipo de asiento que se desea reservar
                     $error = 2;

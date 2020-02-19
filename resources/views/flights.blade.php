@@ -51,7 +51,7 @@
                                                         </div>
                                                         <div class="d-flex flex-column text-right">
                                                             <span class="d-block lblPriceFlight">$ {{ $flight->priceEconomy }} </span>
-                                                            <span class="lblDisponiblesItemFlight d-block">Economy ( {{ $flight->disponibleEconomy }} disponibles)</span>
+                                                            <span class="fontSmall d-block">Economy ( {{ $flight->disponibleEconomy }} disponibles)</span>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -66,7 +66,7 @@
                                                         </div>
                                                         <div class="d-flex flex-column text-right">
                                                             <span class="d-block lblPriceFlight">$ {{ $flight->priceFirst }} </span>
-                                                            <span class="lblDisponiblesItemFlight d-block">Primera clase  ( {{ $flight->disponibleFirst }} disponibles )</span>
+                                                            <span class="fontSmall d-block">Primera clase  ( {{ $flight->disponibleFirst }} disponibles )</span>
                                                         </div>
                                                     </div>
                                                 @endif

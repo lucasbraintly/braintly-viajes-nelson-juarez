@@ -66,10 +66,14 @@
                         <h2 class="titleDetailFlight">Detalle de tu reserva</h2>
                         <div class="boxContentDetailFlight">
                             <div class="boxDetailFlight">
-                                <div class="w-100" style="border-color: #fdbe15; background-color: #ccc;" > 
-                                    <div style="padding: 1rem;"><b>{{ $aDearture->province }}</b> a <b>{{ $aArrival->province }}</b></div>
+                                <div class="boxProvince w-100" > 
+                                    <div class="p-3">
+                                        <b>{{ $aDearture->province }}</b> 
+                                        a 
+                                        <b>{{ $aArrival->province }}</b>
+                                    </div>
                                 </div>
-                                <div class="row px-4" style="min-height: 150px;">
+                                <div class="boxContentDetail row px-4">
                                     <div class="col-12 col-lg-9 align-self-center">
                                         <div class="row pt-4 pt-lg-0">
                                             <div class="col-12 col-md-6 align-self-center"> 
@@ -91,7 +95,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row"> 
-                                                    <div class="col-12 text-center" style="font-size: 12px;"> Duración {{ date('g\h\r i\m\i\n\s ', mktime( 0,$flight->duration )) }} </div> 
+                                                    <div class="col-12 text-center fontSmall"> Duración {{ date('g\h\r i\m\i\n\s ', mktime( 0,$flight->duration )) }} </div> 
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +107,8 @@
                                                 <div class="col-4 text-left">Clase:</div> <div class="col-8 text-right mb-4">{{ $flight->class }} </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-4 text-left align-self-center">Precio:</div> <div class="col-8 text-right font-weight-bold" style="font-size: 24px">
+                                                <div class="col-4 text-left align-self-center">Precio:</div> 
+                                                <div class="col-8 text-right font-weight-bold boxPriceDetail">
                                                     $ {{ number_format($flight->price,2,'.','') }} 
                                                 </div>
                                             </div>
@@ -114,7 +119,7 @@
                         </div>
                     </div>
 
-                    <div class="my-5 py-4 boxMainDetailFlight" style="border-top: 2px solid #ccc;">
+                    <div class="my-5 py-4 boxMainDetailFlight">
                             <form action="saveReservation" method="POST" id="confirm_form">
                                 <input type="hidden" name="idFlight" value="{{ $flight->id }}">
                                 <input type="hidden" name="price" value="{{ $flight->price }}">

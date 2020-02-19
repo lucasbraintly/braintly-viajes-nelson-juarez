@@ -149,13 +149,38 @@ footer {
     border-radius: 10px;
     box-shadow: 0 2px 4px 0 #636680;
 }
-.titleDetailFlight { padding: 14px 20px 10px; border-bottom: solid 2px #ccc; padding: 20px; margin: 0; }
+.titleDetailFlight { 
+    padding: 14px 20px 10px;
+    border-bottom: solid 2px #ccc;
+    padding: 20px;
+    margin: 0;
+}
 
-.boxPriceDetailFlight { border-left: solid #dc3545 4px }
+.boxPriceDetailFlight { 
+    border-left: solid #dc3545 4px 
+
+}
 @media (max-width:992px){
     .boxPriceDetailFlight{
         border-left:none;
     }
 }
-label.error { font-size: 12px; color: #dc3545;}
-input.error { border-color: #dc3545;}
+.boxPriceDetail {
+    font-size: 24px; 
+}
+label.error {
+    font-size: 12px; color: #dc3545;
+}
+input.error {
+    border-color: #dc3545;
+}
+.boxProvince {
+    border-color: #fdbe15; 
+    background-color: #ccc; 
+}
+.boxContentDetail {
+    min-height: 150px; 
+}
+.fontSmall {
+    font-size: 12px; 
+}
